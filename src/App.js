@@ -1,23 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import  Search from "./components/search/search"
+import List from './components/List/list';
+import { useState } from "react";
 
 function App() {
+  let [usersArr,setUsers] = useState([]) 
+  const handleUsers = (users) => {
+    usersArr = users
+    setUsers(usersArr)
+  }
+  
+  let [isFirst, setIsFirst] = useState(true)
+  const handleFirst = () => {
+    setIsFirst(false)
+  }
+
+  let [isLoding, setIsLoding] = useState(false)
+  const handleLoding = () => {
+    isLoding = !isLoding
+    setIsLoding(isLoding)
+  }
+
+  let [err, setErr] = useState('')
+  const handleErr = (errs) => {
+    err = errs
+    setErr(err)
+  }
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          GitSearch
-        </a>
-      </header>
+    <div className="container">
+      <Search handleUsers={handleUsers} handleErr={handleErr} handleFirst={handleFirst} handleLoding={handleLoding} />
+      <List usersArr={usersArr} isFirst={isFirst} isLoding={isLoding} err={err} />
     </div>
   );
 }
