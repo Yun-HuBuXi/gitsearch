@@ -18,8 +18,9 @@ export default function List({usersArr, isFirst, isLoding, err}) {
                 isFirst ? <h2>欢迎使用，输入你想搜索的东西吧</h2> :
                 isLoding ? <h2>Loding...</h2> :
                 err ? <h2 style={{color:"red"}}>{err}</h2> :
+                (usersArr.length===0) ? <h2 style={{color:"red"}}>什么都没有哦</h2> :
                 usersArr.map((userObj) => {
-                    return <Card userObj={userObj} />
+                    return <Card userObj={userObj} key={userObj.id} />
                 })
             }
         </div>
